@@ -1,24 +1,10 @@
-# README
+# Rails BlackJack
+By Sam Marshall
+## A BlackJack simulator for practicing strategy
+Install, play, or find it hosted whenever I figure out Heroku for this.
+## Work in Progress
+Don't do anything with this any time soon.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## MIT License
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Software is under copyright via [MIT License](http://opensource.org/licenses/MIT), available at ~/[LICENSE.md](LICENSE.md).
