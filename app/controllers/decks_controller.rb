@@ -8,8 +8,7 @@ class DecksController < ApplicationController
 
   # GET /decks/1 or /decks/1.json
   def show
-    @deck |= Deck.find(params[:id])
-    format.json { render json: @deck }
+    render json: @deck.to_json, methods: [:piles]
   end
 
   # GET /decks/new
@@ -22,7 +21,7 @@ class DecksController < ApplicationController
 
   # POST /decks or /decks.json
   def create
-    @deck = Deck.new(deck_params)
+    @deck = Deck.new_from_api
 
     respond_to do |format|
       if @deck.save
@@ -64,8 +63,7 @@ class DecksController < ApplicationController
     @deck = Deck.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def deck_params
-    params.require(:deck).permit(:given_id, :name)
+    params.require(:deck).permit(:title, :remaining_cards, :last_card, :deck_id)
   end
 end

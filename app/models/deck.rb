@@ -1,10 +1,9 @@
 class Deck < ApplicationRecord
-  def self.create_with_api(decks = 1, title = 'New Deck')
+  def self.new_from_api(decks = 1, title = "Deck #{Time.now.strftime('%m%d%Y-%H%M%S')}")
     @data = HTTParty.get("http://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=#{decks}")
     deck_id = @data['deck_id']
     remaining_cards = @data['remaining']
-    @deck = Deck.new(deck_id: deck_id, remaining_cards: remaining_cards, title: title)
-    @deck.save
+    Deck.new(deck_id: deck_id, remaining_cards: remaining_cards, title: title)
   end
 
   def self.create_with_deck_id(deck_id, title = deck_id)
@@ -20,6 +19,7 @@ class Deck < ApplicationRecord
     self.remaining_cards = response['remaining']
     self.last_card = {}
     save
+    self
   end
 
   def fetch_deck_update
@@ -43,15 +43,21 @@ class Deck < ApplicationRecord
     response = HTTParty.get(url)
   end
 
-  def cards_in_pile(pile_name)
-    # https://deckofcardsapi.com/api/deck/<<deck_id>>/pile/<<pile_name>>/list/
-    url = "http://deckofcardsapi.com/api/deck/#{deck_id}/pile/#{pile_name}/list/"
-    response = HTTParty.get(url)
+  def draw_and_add_to_pile(num_cards, pile_name)
+    cards = draw(num_cards)
+    add_to_pile(cards, pile_name)
   end
 
-  def draw_and_add_to_pile(num_cards, pile_name)
-    cards = get_card_codes(draw(num_cards))
-    add_to_pile(cards, pile_name)
+  def piles
+    url = "http://deckofcardsapi.com/api/deck/#{deck_id}/pile/_/list/"
+    response = HTTParty.get(url)
+    response['piles']
+  end
+
+  def pile_lookup(pile_name = '_')
+    url = "http://deckofcardsapi.com/api/deck/#{deck_id}/pile/#{pile_name}/list/"
+    response = HTTParty.get(url)
+    response['piles'].select { |k, _v| k == pile_name }
   end
 
   def get_card_codes(cards)
