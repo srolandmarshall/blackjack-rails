@@ -82,6 +82,9 @@ GEM
     ffi (1.15.3)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    haml (5.2.1)
+      temple (>= 0.8.0)
+      tilt
     httparty (0.18.1)
       mime-types (~> 3.0)
       multi_xml (>= 0.5.2)
@@ -175,6 +178,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    temple (0.8.2)
     thor (1.1.0)
     tilt (2.0.10)
     turbolinks (5.2.1)
@@ -210,6 +214,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   capybara (>= 3.26)
+  haml (~> 5.2)
   httparty (~> 0.18.1)
   jbuilder (~> 2.7)
   listen (~> 3.3)

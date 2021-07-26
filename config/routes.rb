@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: 'home#index'
   resources :decks, only: %i[create show destroy update]
   match 'decks/:id/shuffle/', via: %i[get post], to: 'decks#shuffle'
   match 'decks/:id/draw/', via: %i[get post], to: 'decks#draw'
