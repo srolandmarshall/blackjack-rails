@@ -56,3 +56,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "httparty", "~> 0.18.1"
+
+gem "haml", "~> 5.2"
