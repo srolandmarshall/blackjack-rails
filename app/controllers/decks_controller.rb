@@ -1,5 +1,5 @@
 class DecksController < ApplicationController
-  before_action :set_deck, only: %i[show edit update destroy]
+  before_action :set_deck, only: %i[show edit update destroy draw shuffle]
 
   # GET /decks or /decks.json
   def index
@@ -54,6 +54,16 @@ class DecksController < ApplicationController
       format.html { redirect_to decks_url, notice: 'Deck was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def draw
+    cards = @deck.draw(params[:count] || 1)
+    render json: cards.to_json
+  end
+
+  def shuffle
+    @deck.shuffle!
+    render json: @deck.to_json
   end
 
   private
