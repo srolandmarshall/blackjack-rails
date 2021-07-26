@@ -19,7 +19,7 @@ class Deck < ApplicationRecord
 
     response = HTTParty.get(url)
     self.remaining_cards = response['remaining']
-    self.last_card = nil
+    self.last_card = {}
     save
   end
 
